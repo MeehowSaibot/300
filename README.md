@@ -21,7 +21,7 @@ z przypisanymi do nich książkami należy uruchomić migracje z opcją --seed:
 
     php artisan migrate --seed
 
-Testy powinny działać automatycznie, gdyż wskazana jest w konfiguracji PHPUnit pamięć jako baza danych.
+Testy powinny działać od razu, gdyż w konfiguracji PHPUnit wskazana jako baza danych jest pamięć urządzenia.
 W przypadku, gdy chcemy testować na innej bazie danych - należy to skonfigurować.
 
 -------------------------------------------------------------------------------------------------------------
