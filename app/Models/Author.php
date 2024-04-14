@@ -23,6 +23,7 @@ class Author extends Model
 
     protected $fillable = [
         'full_name',
+        'last_book',
     ];
 
     /**

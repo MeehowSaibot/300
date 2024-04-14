@@ -36,6 +36,8 @@ W przypadku, gdy chcemy testować na innej bazie danych - należy to skonfigurow
 - Dodanie dokumentacji swaggerowej
 - Role użytkowników z uprawnieniami/autoryzacja 
 - Odchudzić zapytania aby odpytywać tylko potrzebne kolumny
+- Z komendy wyciągnął bezpośrednie działanie na bazie do serwisu i dodał przy okazji endpoint do dodawania autorów
+- W nawiązaniu do w/w zrobić lepszą walidację tworzenia autora/jego książki poprzez dodanie nowego requestu walidującego
 
 -------------------------------------------------------------------------------------------------------------
 # Informacje o projekcie
