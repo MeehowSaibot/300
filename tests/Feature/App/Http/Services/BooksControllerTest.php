@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Jobs\UpdateAuthorsLastBookJob;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\User;
 use Database\Seeders\TestCasesSeeder;
 use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,6 +38,8 @@ class BooksControllerTest extends TestCase
     {
         Queue::fake();
 
+        $user = User::factory()->create();
+
         $this->assertDatabaseCount(Author::class, 20);
         $this->assertDatabaseCount(Book::class, 20);
 
@@ -44,7 +47,7 @@ class BooksControllerTest extends TestCase
 
         $newBookName = $this->faker->sentence;
 
-        $response = $this->json('post', '/api/books/',
+        $response = $this->actingAs($user)->json('post', '/api/books/',
             [
                 'book_name' => $newBookName,
                 'author_id' => $this->firstAuthor->id,
@@ -96,10 +99,12 @@ class BooksControllerTest extends TestCase
     // api/POST/books/
     public function testAddBookAlreadyExistsFail()
     {
+        $user = User::factory()->create();
+
         $this->assertDatabaseCount(Author::class, 20);
         $this->assertDatabaseCount(Book::class, 20);
 
-        $response = $this->json('post', '/api/books/',
+        $response = $this->actingAs($user)->json('post', '/api/books/',
             [
                 'book_name' => $this->firstBook->name,
                 'author_id' => $this->firstAuthor->id,
@@ -119,6 +124,26 @@ class BooksControllerTest extends TestCase
                 ],
         ]);
     }
+
+    // api/POST/books/
+    public function testAddUnauthorisedFail()
+    {
+        Queue::fake();
+
+        $this->assertDatabaseCount(Author::class, 20);
+        $this->assertDatabaseCount(Book::class, 20);
+
+        $newBookName = $this->faker->sentence;
+
+        $response = $this->json('post', '/api/books/',
+            [
+                'book_name' => $newBookName,
+                'author_id' => $this->firstAuthor->id,
+            ]);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
 
     // api/DELETE/books
     public function testDeleteBookSuccess()

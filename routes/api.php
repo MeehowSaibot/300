@@ -25,7 +25,7 @@ Route::group(['prefix' => 'authors'], function () {
 Route::group(['prefix' => 'books'], function () {
     Route::get('/', [BookController::class, 'getBooks']);
     Route::get('/{id}', [BookController::class, 'getBook']);
-    Route::post('/books', [BookController::class, 'addBook'])->middleware('auth:sanctum');
+    Route::post('/', [BookController::class, 'addBook'])->middleware('auth:sanctum');
     Route::put('', [BookController::class, 'updateBook']);
     Route::delete('/{id}', [BookController::class, 'deleteBook']);
 });

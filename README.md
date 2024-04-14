@@ -9,6 +9,10 @@ Następnie należy utworzyć plik .env wykorzustując istniejący plik:
 
     .env.example
 
+Następnie należy wygenerować klucz aplikacji poprzez komendę:
+
+    php artisan key:generate
+
 Po udanej instalacji należy utworzyć bazę danych. W przypadku procesu tworzenia aplikacji oraz
 jej testowania użyta została baza SQLite ze względu na nieskomplikowane wymogi związane ze strukturą bazy.
 
